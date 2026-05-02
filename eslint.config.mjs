@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "backend/**",
+    "scripts/**",
+    "test/**",
+    "ignition/**",
+    "hardhat.config.js",
+    "hardhat.config.ts",
   ]),
 ]);
 

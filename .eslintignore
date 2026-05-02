@@ -1,0 +1,8 @@
+node_modules/
+.next/
+scripts/
+test/
+ignition/
+backend/
+hardhat.config.js
+hardhat.config.ts

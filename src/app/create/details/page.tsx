@@ -18,12 +18,12 @@ export default function CreateDetailsPage() {
   const router = useRouter();
   const { authenticated, login, user } = usePrivy();
   const { wallets } = useWallets();
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    setName(url.searchParams.get("name") ?? "");
-  }, []);
+  const [name, setName] = useState(() => {
+    if (typeof window !== "undefined") {
+      return new URL(window.location.href).searchParams.get("name") ?? "";
+    }
+    return "";
+  });
 
   const [x, setX] = useState("");
   const [linkedin, setLinkedin] = useState("");
@@ -42,7 +42,7 @@ export default function CreateDetailsPage() {
     setIsSubmitting(true);
     setLoadingText("Minting your vibe...");
 
-    let walletAddress = wallets[0]?.address;
+    const walletAddress = wallets[0]?.address;
     if (!walletAddress) {
       if (!authenticated) {
         setIsSubmitting(false);

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { DivIcon, LatLngTuple } from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
+import Link from "next/link";
 import { COLLECTION_FEE_MON } from "@/lib/contracts";
 import { supabase, type EncounterWaveRow, type LiveLocationRow } from "@/lib/supabase";
 import { payCollectionFee } from "@/lib/walletFee";
@@ -80,9 +81,6 @@ function RecenterOnMe({ center }: { center: LatLngTuple }) {
   return null;
 }
 
-function parseTs(value: string) {
-  return new Date(value).getTime();
-}
 
 function createDummyRows(center: LatLngTuple): LiveLocationRow[] {
   return dummyNames.map((name, index) => {
@@ -106,16 +104,22 @@ export function PokemonMap() {
   const { authenticated, login, user } = usePrivy();
   const { wallets } = useWallets();
   const [center, setCenter] = useState<LatLngTuple>([28.6139, 77.209]);
-  const [myAddress, setMyAddress] = useState("");
+  const myAddress = wallets[0]?.address ?? "";
   const [displayName, setDisplayName] = useState("Explorer");
   const [rows, setRows] = useState<LiveLocationRow[]>([]);
   const [incomingWaves, setIncomingWaves] = useState<EncounterWaveRow[]>([]);
-  const [nearby, setNearby] = useState<LiveLocationRow | null>(null);
+
   const [message, setMessage] = useState("");
   const [feeExplorerUrl, setFeeExplorerUrl] = useState("");
   const [collectExplorerUrl, setCollectExplorerUrl] = useState("");
   const [emailLabel, setEmailLabel] = useState("networking@omnimesh.local");
   const [networkingUntil, setNetworkingUntil] = useState<number | null>(null);
+  const [now, setNow] = useState<number>(() => Date.now());
+
+  useEffect(() => {
+    const interval = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(interval);
+  }, []);
   const [currentPos, setCurrentPos] = useState<LatLngTuple | null>(null);
   const [lastSentPos, setLastSentPos] = useState<LatLngTuple | null>(null);
 
@@ -126,34 +130,35 @@ export function PokemonMap() {
     return window.localStorage.getItem("omnimesh-profile-id");
   }, []);
 
-  const isNetworking = networkingUntil !== null && networkingUntil > Date.now();
+  const isNetworking = networkingUntil !== null && networkingUntil > now;
 
   const secondsLeft = networkingUntil
-    ? Math.max(0, Math.floor((networkingUntil - Date.now()) / 1000))
+    ? Math.max(0, Math.floor((networkingUntil - now) / 1000))
     : 0;
 
   useEffect(() => {
-    setMyAddress(wallets[0]?.address ?? "");
 
-    if (typeof window !== "undefined") {
-      const localName = window.localStorage.getItem("omnimesh-display-name");
-      if (localName) {
-        setDisplayName(localName);
-      }
+    setTimeout(() => {
+      if (typeof window !== "undefined") {
+        const localName = window.localStorage.getItem("omnimesh-display-name");
+        if (localName) {
+          setDisplayName(localName);
+        }
 
-      const email = user?.email?.address ?? window.localStorage.getItem("omnimesh-email");
-      if (email) {
-        setEmailLabel(email);
-      }
+        const email = user?.email?.address ?? window.localStorage.getItem("omnimesh-email");
+        if (email) {
+          setEmailLabel(email);
+        }
 
-      const savedUntil = window.localStorage.getItem("omnimesh-networking-until");
-      if (savedUntil) {
-        const parsed = Number(savedUntil);
-        if (!Number.isNaN(parsed) && parsed > Date.now()) {
-          setNetworkingUntil(parsed);
+        const savedUntil = window.localStorage.getItem("omnimesh-networking-until");
+        if (savedUntil) {
+          const parsed = Number(savedUntil);
+          if (!Number.isNaN(parsed) && parsed > Date.now()) {
+            setNetworkingUntil(parsed);
+          }
         }
       }
-    }
+    }, 0);
   }, [user?.email?.address, wallets]);
 
   useEffect(() => {
@@ -294,14 +299,12 @@ export function PokemonMap() {
     return () => clearInterval(tick);
   }, [isNetworking]);
 
-  useEffect(() => {
+  const nearby = useMemo(() => {
     const others = rows.filter((row) => row.wallet_address !== myAddress);
-    const hit = others.find((row) => {
+    return others.find((row) => {
       const distance = getDistanceMeters(center, [row.latitude, row.longitude]);
       return distance <= ENCOUNTER_METERS;
-    });
-
-    setNearby(hit ?? null);
+    }) ?? null;
   }, [center, myAddress, rows]);
 
   const visibleRows = rows.filter((row) => row.wallet_address !== myAddress).slice(0, 200);
@@ -449,18 +452,18 @@ export function PokemonMap() {
           >
             I&apos;m Networking ⚡
           </button>
-          <a
+          <Link
             href="/profile"
             className="rounded-full border-2 border-black bg-white px-5 py-3 text-base font-black text-black"
           >
             View My Card
-          </a>
-          <a
+          </Link>
+          <Link
             href="/me"
             className="rounded-full border-2 border-black bg-[#fff4d6] px-5 py-3 text-base font-black text-black"
           >
             My Collection
-          </a>
+          </Link>
         </div>
       </section>
     );

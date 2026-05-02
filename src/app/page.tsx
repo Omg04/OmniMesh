@@ -45,7 +45,7 @@ export default function Home() {
           </ul>
           <div className="mt-6 rounded-2xl border-2 border-black bg-white p-4">
             <p className="text-sm font-bold text-zinc-700">System chatter:</p>
-            <p className="text-base font-black text-black">"Radar locked. Monad going brrrr..."</p>
+            <p className="text-base font-black text-black">&quot;Radar locked. Monad going brrrr...&quot;</p>
           </div>
         </div>
       </section>

@@ -114,7 +114,7 @@ export function PokemonMap() {
   const [message, setMessage] = useState("");
   const [feeExplorerUrl, setFeeExplorerUrl] = useState("");
   const [collectExplorerUrl, setCollectExplorerUrl] = useState("");
-  const [emailLabel, setEmailLabel] = useState("networking@proofgo.local");
+  const [emailLabel, setEmailLabel] = useState("networking@omnimesh.local");
   const [networkingUntil, setNetworkingUntil] = useState<number | null>(null);
   const [currentPos, setCurrentPos] = useState<LatLngTuple | null>(null);
   const [lastSentPos, setLastSentPos] = useState<LatLngTuple | null>(null);
@@ -123,7 +123,7 @@ export function PokemonMap() {
     if (typeof window === "undefined") {
       return null;
     }
-    return window.localStorage.getItem("proof-go-profile-id");
+    return window.localStorage.getItem("omnimesh-profile-id");
   }, []);
 
   const isNetworking = networkingUntil !== null && networkingUntil > Date.now();
@@ -136,17 +136,17 @@ export function PokemonMap() {
     setMyAddress(wallets[0]?.address ?? "");
 
     if (typeof window !== "undefined") {
-      const localName = window.localStorage.getItem("proof-go-display-name");
+      const localName = window.localStorage.getItem("omnimesh-display-name");
       if (localName) {
         setDisplayName(localName);
       }
 
-      const email = user?.email?.address ?? window.localStorage.getItem("proof-go-email");
+      const email = user?.email?.address ?? window.localStorage.getItem("omnimesh-email");
       if (email) {
         setEmailLabel(email);
       }
 
-      const savedUntil = window.localStorage.getItem("proof-go-networking-until");
+      const savedUntil = window.localStorage.getItem("omnimesh-networking-until");
       if (savedUntil) {
         const parsed = Number(savedUntil);
         if (!Number.isNaN(parsed) && parsed > Date.now()) {
@@ -216,14 +216,14 @@ export function PokemonMap() {
     loadWaves();
 
     const locationsChannel = client
-      .channel("proof-go-live-locations")
+      .channel("omnimesh-live-locations")
       .on("postgres_changes", { event: "*", schema: "public", table: "live_locations" }, () => {
         loadLocations();
       })
       .subscribe();
 
     const wavesChannel = client
-      .channel("proof-go-waves")
+      .channel("omnimesh-waves")
       .on("postgres_changes", { event: "*", schema: "public", table: "encounter_waves" }, () => {
         loadWaves();
       })
@@ -283,7 +283,7 @@ export function PokemonMap() {
         }
         if (prev <= Date.now()) {
           if (typeof window !== "undefined") {
-            window.localStorage.removeItem("proof-go-networking-until");
+            window.localStorage.removeItem("omnimesh-networking-until");
           }
           return null;
         }
@@ -324,7 +324,7 @@ export function PokemonMap() {
     setNetworkingUntil(expires);
     setMessage("Networking mode on. Radar warming up...");
     if (typeof window !== "undefined") {
-      window.localStorage.setItem("proof-go-networking-until", String(expires));
+      window.localStorage.setItem("omnimesh-networking-until", String(expires));
     }
   };
 
@@ -332,7 +332,7 @@ export function PokemonMap() {
     setNetworkingUntil(null);
     setMessage("Networking mode paused.");
     if (typeof window !== "undefined") {
-      window.localStorage.removeItem("proof-go-networking-until");
+      window.localStorage.removeItem("omnimesh-networking-until");
     }
 
     const client = supabase;

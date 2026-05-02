@@ -23,7 +23,7 @@ export function NavBar() {
     <header className="sticky top-0 z-50 border-b-4 border-black bg-[#fff4d6]">
       <nav className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-3">
         <Link href="/" className="text-xl font-black tracking-tight text-black">
-          Proof Go ⚡
+          OmniMesh ⚡
         </Link>
         <div className="flex flex-wrap items-center gap-2">
           {links.map((link) => {

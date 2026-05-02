@@ -15,7 +15,7 @@ export default function Home() {
             & Collect People
           </h1>
           <p className="max-w-xl text-lg font-bold text-zinc-800">
-            Proof Go uses ambient networking: turn it on only when you are socially available,
+            OmniMesh uses ambient networking: turn it on only when you are socially available,
             discover nearby builders in a soft radar, wave, confirm meeting, then mint proof instantly on Monad.
           </p>
           <div className="flex flex-wrap gap-3">

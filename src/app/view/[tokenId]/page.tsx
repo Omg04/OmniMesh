@@ -177,7 +177,7 @@ export default function PublicProfilePage() {
             </button>
             <button
               type="button"
-              onClick={() => navigator.share?.({ title: "ProofOfMeet", url: window.location.href })}
+              onClick={() => navigator.share?.({ title: "OmniMesh", url: window.location.href })}
               className="rounded-full border-2 border-black bg-[#fff4d6] px-4 py-2 font-black text-black"
             >
               Share

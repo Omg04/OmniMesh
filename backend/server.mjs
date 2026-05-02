@@ -372,7 +372,7 @@ async function startChainSync() {
 }
 
 app.listen(PORT, async () => {
-  console.log(`Proof Go indexer listening on ${PORT}`);
+  console.log(`OmniMesh indexer listening on ${PORT}`);
   if (supabase) {
     if (SUPABASE_SERVICE_ROLE_KEY) {
       console.log("Using Supabase backend mode (service role).");

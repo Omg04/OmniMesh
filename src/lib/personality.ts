@@ -60,7 +60,7 @@ export function createFallbackPoster(name: string, tagline: string, traits: stri
     <rect width='1200' height='1600' rx='60' fill='url(#g)' />
     <circle cx='1040' cy='180' r='120' fill='#ffffff88'/>
     <circle cx='170' cy='1380' r='140' fill='#ffffff66'/>
-    <text x='100' y='220' font-family='Verdana' font-size='44' fill='#111'>Proof Go</text>
+    <text x='100' y='220' font-family='Verdana' font-size='44' fill='#111'>OmniMesh</text>
     <text x='100' y='320' font-family='Verdana' font-size='112' font-weight='700' fill='#111'>${safeName}</text>
     <text x='100' y='410' font-family='Verdana' font-size='42' fill='#1f2937'>${safeTagline}</text>
     <rect x='90' y='520' width='1020' height='180' rx='34' fill='#ffffffcc'/>
@@ -118,7 +118,7 @@ async function fetchPageMeta(url: string): Promise<{ title?: string; description
       redirect: "follow",
       signal: controller.signal,
       headers: {
-        "user-agent": "Mozilla/5.0 (compatible; ProofGoBot/1.0)",
+        "user-agent": "Mozilla/5.0 (compatible; OmniMeshBot/1.0)",
       },
     });
 
@@ -351,7 +351,7 @@ export function createPokemonCardPoster(
     <text x='118' y='1294' font-family='Verdana' font-size='26' fill='#111'>Traits: ${traitText}</text>
     <text x='118' y='1340' font-family='Verdana' font-size='24' fill='#111'>Tagline: ${safeTagline}</text>
 
-    <text x='90' y='1476' font-family='Verdana' font-size='28' fill='#111'>Proof Go • Monad Testnet ⚡</text>
+    <text x='90' y='1476' font-family='Verdana' font-size='28' fill='#111'>OmniMesh • Monad Testnet ⚡</text>
   </svg>`;
 
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;

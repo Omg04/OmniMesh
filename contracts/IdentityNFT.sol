@@ -9,7 +9,7 @@ contract IdentityNFT is ERC721URIStorage, Ownable {
 
     event IdentityMinted(uint256 indexed tokenId, address indexed user, string metadataURI);
 
-    constructor() ERC721("ProofOfMeet Identity", "POMI") Ownable(msg.sender) {}
+    constructor() ERC721("OmniMesh Identity", "POMI") Ownable(msg.sender) {}
 
     function mintIdentity(address user, string memory metadataURI) external returns (uint256) {
         _tokenIds += 1;

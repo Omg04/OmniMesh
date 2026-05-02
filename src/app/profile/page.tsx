@@ -32,7 +32,7 @@ export default function MyProfilePage() {
       }
 
       if (!authenticated && typeof window !== "undefined") {
-        const tokenId = window.localStorage.getItem("proof-go-profile-id");
+        const tokenId = window.localStorage.getItem("omnimesh-profile-id");
         if (tokenId) {
           const byToken = await fetchProfile(tokenId);
           setProfile(byToken);

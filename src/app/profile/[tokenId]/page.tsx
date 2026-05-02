@@ -24,7 +24,7 @@ export default function ProfilePage() {
       }
 
       if (typeof window !== "undefined") {
-        const raw = window.localStorage.getItem("proof-go-latest-profile");
+        const raw = window.localStorage.getItem("omnimesh-latest-profile");
         if (raw) {
           try {
             const local = JSON.parse(raw) as IdentityProfile;

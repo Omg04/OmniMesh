@@ -29,8 +29,8 @@ export async function POST(request: Request) {
     const card = await buildPokemonIdentityCard(name, tagline, traits, socials ?? {});
 
     const metadata = {
-      name: `${name} • Proof Go Identity`,
-      description: "Identity minted on Monad through Proof Go.",
+      name: `${name} • OmniMesh Identity`,
+      description: "Identity minted on Monad through OmniMesh.",
       image: card.posterUrl,
       attributes: [
         { trait_type: "Tagline", value: tagline },

@@ -17,7 +17,7 @@ const body = Fredoka({
 });
 
 export const metadata: Metadata = {
-  title: "Proof Go — Scan, Discover & Collect on Monad",
+  title: "OmniMesh — Scan, Discover & Collect on Monad",
   description: "Identity minting and social collecting with Monad speed. Powered by Monad testnet.",
 };
 

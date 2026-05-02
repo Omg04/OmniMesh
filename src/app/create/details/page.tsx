@@ -76,11 +76,11 @@ export default function CreateDetailsPage() {
     setLoadingText("Finalized ⚡");
     const payload = (await response.json()) as MintResponse;
     if (typeof window !== "undefined") {
-      window.localStorage.setItem("proof-go-display-name", name);
-      window.localStorage.setItem("proof-go-profile-id", payload.profile.tokenId);
-      window.localStorage.setItem("proof-go-latest-profile", JSON.stringify(payload.profile));
+      window.localStorage.setItem("omnimesh-display-name", name);
+      window.localStorage.setItem("omnimesh-profile-id", payload.profile.tokenId);
+      window.localStorage.setItem("omnimesh-latest-profile", JSON.stringify(payload.profile));
       if (user?.email?.address) {
-        window.localStorage.setItem("proof-go-email", user.email.address);
+        window.localStorage.setItem("omnimesh-email", user.email.address);
       }
     }
     setTimeout(() => {

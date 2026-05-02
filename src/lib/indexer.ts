@@ -1,4 +1,4 @@
-const INDEXER_URL = process.env.NEXT_PUBLIC_INDEXER_URL ?? "https://proof-go.onrender.com";
+const INDEXER_URL = process.env.NEXT_PUBLIC_INDEXER_URL ?? "https://omnimesh.onrender.com";
 const INDEXER_TIMEOUT_MS = 4500;
 
 async function postIndexer(path: string, payload: unknown) {

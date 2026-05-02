@@ -18,12 +18,13 @@ export default function CreateDetailsPage() {
   const router = useRouter();
   const { authenticated, login, user } = usePrivy();
   const { wallets } = useWallets();
-  const [name, setName] = useState(() => {
+  const [name, setName] = useState("");
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
-      return new URL(window.location.href).searchParams.get("name") ?? "";
+      setName(new URLSearchParams(window.location.search).get("name") ?? "");
     }
-    return "";
-  });
+  }, []);
 
   const [x, setX] = useState("");
   const [linkedin, setLinkedin] = useState("");

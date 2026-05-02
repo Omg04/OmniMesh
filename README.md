@@ -1,6 +1,6 @@
 # 🌐 OmniMesh 
 
-[![Deployed Link](https://img.shields.io/badge/Live%20App-OmniMesh-00b96b?style=for-the-badge&logo=render)](https://omnimesh.onrender.com)
+[![Deployed Link](https://img.shields.io/badge/Live%20App-OmniMesh-00b96b?style=for-the-badge&logo=render)](https://proof-go-chi.vercel.app/)
 [![Monad](https://img.shields.io/badge/Powered%20by-Monad-836EF9?style=for-the-badge)](https://monad.xyz)
 
 > **Connect, Discover & Collect People**  
